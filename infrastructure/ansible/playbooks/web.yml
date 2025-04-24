@@ -1,0 +1,16 @@
+---
+- hosts: web_servers
+  become: yes
+  roles:
+    - nginx
+    - node_exporter
+    - filebeat
+
+  tasks:
+    - name: Deploy static website
+      copy:
+        src: ../../website/
+        dest: /var/www/html
+        owner: www-data
+        group: www-data
+        mode: '0644'

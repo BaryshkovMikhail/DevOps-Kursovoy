@@ -1,0 +1,12 @@
+---
+- hosts: bastion
+  become: yes
+  tasks:
+    - name: Harden SSH
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        line: "{{ item }}"
+      with_items:
+        - "PermitRootLogin no"
+        - "PasswordAuthentication no"
+      notify: restart sshd

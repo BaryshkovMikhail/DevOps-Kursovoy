@@ -1,0 +1,12 @@
+---
+- hosts: prometheus
+  become: yes
+  roles:
+    - prometheus
+
+  tasks:
+    - name: Configure Prometheus targets
+      template:
+        src: templates/prometheus_targets.j2
+        dest: /etc/prometheus/targets.yml
+      notify: restart prometheus

@@ -1,0 +1,10 @@
+---
+- hosts: grafana
+  become: yes
+  roles:
+    - grafana
+
+  tasks:
+    - name: Import dashboards
+      command: >
+        grafana-cli --pluginsDir /var/lib/grafana/plugins plugins install grafana-piechart-panel
